@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Outlet, NavLink, useLocation } from "react-router-dom";
+import { useState } from "react"
+import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom"
 import {
   LayoutDashboard,
   FileText,
@@ -8,58 +8,103 @@ import {
   Zap,
   Fuel,
   Users,
+  Users2,
   ArrowLeftRight,
   Settings,
   Menu,
   X,
-  ChevronRight,
-} from "lucide-react";
+  LogOut,
+  User,
+} from "lucide-react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useAuth } from "@/hooks/useAuth"
 
-/* ── Nav items ── */
+/* ── Types ── */
 interface NavItem {
-  icon: React.ElementType;
-  label: string;
-  to: string;
-  badge?: { text: string; color: "orange" | "violet" | "green" | "gray" };
+  icon: React.ElementType
+  label: string
+  to: string
+  badge?: { text: string; variant: "orange" | "violet" | "gray" }
 }
 
+/* ── Nav items ── */
 const NAV_ITEMS: NavItem[] = [
   { icon: LayoutDashboard, label: "Dashboard",          to: "/" },
-  { icon: FileText,        label: "Facturas",           to: "/facturas",           badge: { text: "IA",        color: "orange"  } },
-  { icon: BookCheck,       label: "Causación",          to: "/causacion",          badge: { text: "n8n",       color: "violet"  } },
-  { icon: Building2,       label: "DIAN",               to: "/dian",               badge: { text: "RPA",       color: "green"   } },
+  { icon: FileText,        label: "Facturas",           to: "/facturas",          badge: { text: "IA",    variant: "orange" } },
+  { icon: BookCheck,       label: "Causación",          to: "/causacion",         badge: { text: "Auto",  variant: "violet" } },
+  { icon: Building2,       label: "DIAN",               to: "/dian",              badge: { text: "RPA",   variant: "orange" } },
   { icon: Zap,             label: "Servicios Públicos", to: "/servicios-publicos" },
   { icon: Fuel,            label: "Combustible",        to: "/combustible" },
-  { icon: Users,           label: "Leads",              to: "/leads",              badge: { text: "WhatsApp",  color: "green"   } },
-  { icon: ArrowLeftRight,  label: "Conciliación",       to: "/conciliacion",       badge: { text: "Próximo",   color: "gray"    } },
+  { icon: Users,           label: "Leads",              to: "/leads",             badge: { text: "Auto",  variant: "orange" } },
+  { icon: ArrowLeftRight,  label: "Conciliación",       to: "/conciliacion",      badge: { text: "Pronto", variant: "gray" } },
   { icon: Settings,        label: "Configuración",      to: "/configuracion" },
-];
+]
 
-/* ── Badge colors ── */
-const BADGE_STYLES: Record<string, string> = {
-  orange: "bg-orange-500/20 text-orange-400 border border-orange-500/30",
-  violet: "bg-violet-500/20 text-violet-300 border border-violet-500/30",
-  green:  "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30",
-  gray:   "bg-white/10 text-white/40 border border-white/15",
-};
+/* ── Page titles ── */
+const PAGE_TITLES: Record<string, string> = {
+  "/":                   "Dashboard",
+  "/facturas":           "Facturas",
+  "/facturas/nueva":     "Nueva Factura",
+  "/causacion":          "Causación",
+  "/dian":               "DIAN",
+  "/servicios-publicos": "Servicios Públicos",
+  "/combustible":        "Combustible",
+  "/leads":              "Leads",
+  "/conciliacion":       "Conciliación",
+  "/configuracion":      "Configuración",
+}
 
-/* ── Breadcrumb map ── */
-const BREADCRUMB: Record<string, string[]> = {
-  "/":                    ["Dashboard"],
-  "/facturas":            ["Facturas"],
-  "/facturas/nueva":      ["Facturas", "Nueva"],
-  "/causacion":           ["Causación"],
-  "/dian":                ["DIAN"],
-  "/servicios-publicos":  ["Servicios Públicos"],
-  "/combustible":         ["Combustible"],
-  "/leads":               ["Leads"],
-  "/conciliacion":        ["Conciliación"],
-  "/configuracion":       ["Configuración"],
-};
+/* ── Badge styles ── */
+const BADGE: Record<string, React.CSSProperties & { className: string }> = {
+  orange: {
+    className: "text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none",
+    background: "rgba(249,115,22,0.2)",
+    color: "#F97316",
+    border: "1px solid rgba(249,115,22,0.3)",
+  },
+  violet: {
+    className: "text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none",
+    background: "rgba(124,58,237,0.2)",
+    color: "#A78BFA",
+    border: "1px solid rgba(124,58,237,0.3)",
+  },
+  gray: {
+    className: "text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none",
+    background: "rgba(255,255,255,0.08)",
+    color: "rgba(255,255,255,0.35)",
+    border: "1px solid rgba(255,255,255,0.12)",
+  },
+}
+
+/* ── Role badge ── */
+function RoleBadge({ role }: { role: string }) {
+  const styles: Record<string, { bg: string; color: string; label: string }> = {
+    administrador: { bg: "#7C3AED", color: "#fff",     label: "Administrador" },
+    operador:      { bg: "#F97316", color: "#fff",     label: "Operador"      },
+    visualizador:  { bg: "#2563EB", color: "#fff",     label: "Visualizador"  },
+    cliente:       { bg: "#16A34A", color: "#fff",     label: "Cliente"       },
+  }
+  const s = styles[role] ?? { bg: "#6B7280", color: "#fff", label: role }
+  return (
+    <span
+      className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
+      style={{ background: s.bg, color: s.color }}
+    >
+      {s.label}
+    </span>
+  )
+}
 
 /* ── Sidebar ── */
 function Sidebar({ onClose }: { onClose?: () => void }) {
-  const location = useLocation();
+  const location = useLocation()
 
   return (
     <aside
@@ -67,30 +112,29 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
       style={{ background: "#0F0F1A" }}
     >
       {/* Logo */}
-      <div className="flex items-center justify-between px-6 py-5 border-b border-white/8">
+      <div
+        className="flex items-center justify-between px-6 py-5"
+        style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+      >
         <div className="flex flex-col leading-tight">
           <span
             className="text-2xl font-bold"
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+            style={{ color: "#7C3AED" }}
           >
             IntegrIA
           </span>
-          <span className="text-[11px] tracking-widest text-white/35 uppercase">
+          <span className="text-[11px] tracking-widest uppercase" style={{ color: "#6B7280" }}>
             Solutions
           </span>
         </div>
 
-        {/* Mobile close */}
         {onClose && (
           <button
             onClick={onClose}
-            className="lg:hidden text-white/40 hover:text-white/80 transition-colors"
+            className="lg:hidden transition-colors"
+            style={{ color: "rgba(255,255,255,0.4)" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.8)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
           >
             <X size={20} />
           </button>
@@ -100,118 +144,163 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
         {NAV_ITEMS.map(({ icon: Icon, label, to, badge }) => {
-          const isActive =
-            to === "/"
-              ? location.pathname === "/"
-              : location.pathname.startsWith(to);
+          const isActive = to === "/" ? location.pathname === "/" : location.pathname.startsWith(to)
+          const { className: badgeClass, ...badgeStyle } = badge ? BADGE[badge.variant] : { className: "" }
 
           return (
             <NavLink
               key={to}
               to={to}
               onClick={onClose}
-              className={[
-                "group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 relative",
-                isActive
-                  ? "bg-violet-600/20 text-white"
-                  : "text-white/55 hover:text-white/90 hover:bg-white/6",
-              ].join(" ")}
-              style={
-                isActive
-                  ? { borderLeft: "3px solid #F97316", paddingLeft: "calc(0.75rem - 3px)" }
-                  : { borderLeft: "3px solid transparent", paddingLeft: "calc(0.75rem - 3px)" }
-              }
+              className="group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150"
+              style={({ isActive: navActive }) => ({
+                background: (navActive && to !== "/") || isActive ? "#7C3AED" : "transparent",
+                color: isActive ? "#FFFFFF" : "#9CA3AF",
+                borderLeft: isActive ? "3px solid #F97316" : "3px solid transparent",
+                paddingLeft: "calc(0.75rem - 3px)",
+              })}
+              onMouseEnter={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.background = "rgba(255,255,255,0.05)"
+                  e.currentTarget.style.color = "#FFFFFF"
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) {
+                  e.currentTarget.style.background = "transparent"
+                  e.currentTarget.style.color = "#9CA3AF"
+                }
+              }}
             >
               <Icon
                 size={18}
-                className={isActive ? "text-violet-400" : "text-white/40 group-hover:text-white/70"}
+                style={{ color: isActive ? "#FFFFFF" : "#6B7280", flexShrink: 0 }}
               />
               <span className="flex-1 truncate">{label}</span>
               {badge && (
-                <span
-                  className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none ${BADGE_STYLES[badge.color]}`}
-                >
+                <span className={badgeClass} style={badgeStyle}>
                   {badge.text}
                 </span>
               )}
             </NavLink>
-          );
+          )
         })}
       </nav>
 
       {/* Footer */}
-      <div className="px-6 py-4 border-t border-white/8">
-        <p className="text-[11px] text-white/25 tracking-wide">
-          v1.0.0 · Powered by n8n
+      <div
+        className="px-6 py-4 text-center"
+        style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+      >
+        <p className="text-[11px]" style={{ color: "#4B5563" }}>
+          IntegrIApp v1.0
         </p>
       </div>
     </aside>
-  );
+  )
 }
 
 /* ── Topbar ── */
 function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
-  const location = useLocation();
-  const crumbs = BREADCRUMB[location.pathname] ?? ["Página"];
+  const location = useLocation()
+  const navigate = useNavigate()
+  const { profile, signOut } = useAuth()
+
+  const pageTitle = PAGE_TITLES[location.pathname] ?? "Página"
+
+  const initials = profile?.full_name
+    ? profile.full_name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase()
+    : "U"
+
+  async function handleSignOut() {
+    await signOut()
+    navigate("/login")
+  }
 
   return (
     <header
-      className="h-16 shrink-0 flex items-center justify-between px-6 border-b border-black/6"
-      style={{ background: "#FFFFFF" }}
+      className="h-16 shrink-0 flex items-center justify-between px-6"
+      style={{ background: "#FFFFFF", borderBottom: "1px solid #E5E7EB" }}
     >
-      {/* Left: hamburger + breadcrumb */}
+      {/* Left */}
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuClick}
-          className="lg:hidden p-1.5 rounded-md text-gray-500 hover:text-gray-800 hover:bg-gray-100 transition-colors"
+          className="lg:hidden p-1.5 rounded-md transition-colors"
+          style={{ color: "#FFFFFF", background: "#7C3AED" }}
         >
           <Menu size={20} />
         </button>
 
-        <nav className="flex items-center gap-1.5 text-sm">
-          <span className="text-gray-400 font-medium">IntegrIApp</span>
-          {crumbs.map((crumb, i) => (
-            <span key={i} className="flex items-center gap-1.5">
-              <ChevronRight size={14} className="text-gray-300" />
-              <span
-                className={
-                  i === crumbs.length - 1
-                    ? "font-semibold text-gray-800"
-                    : "text-gray-400"
-                }
-                style={
-                  i === crumbs.length - 1
-                    ? { fontFamily: "'Space Grotesk', sans-serif" }
-                    : undefined
-                }
-              >
-                {crumb}
-              </span>
-            </span>
-          ))}
-        </nav>
+        <h1 className="text-base font-bold" style={{ color: "#1A1A2E" }}>
+          {pageTitle}
+        </h1>
       </div>
 
-      {/* Right: n8n status */}
-      <div className="flex items-center gap-2 text-sm text-gray-500">
-        <span
-          className="relative flex h-2.5 w-2.5"
-          title="n8n conectado"
-        >
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-        </span>
-        <span className="text-xs font-medium text-emerald-600 hidden sm:inline">
-          n8n conectado
-        </span>
+      {/* Right */}
+      <div className="flex items-center gap-3">
+        {/* Avatar dropdown */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              className="flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold text-white focus:outline-none transition-opacity hover:opacity-80"
+              style={{ background: "#7C3AED" }}
+            >
+              {initials}
+            </button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent align="end" className="w-56">
+            {/* User info */}
+            <DropdownMenuLabel className="font-normal">
+              <div className="flex flex-col gap-1.5">
+                <p className="text-sm font-semibold leading-none text-gray-900">
+                  {profile?.full_name ?? "Usuario"}
+                </p>
+                <p className="text-xs leading-none text-gray-500">
+                  {profile?.email ?? ""}
+                </p>
+                {profile?.role && (
+                  <div className="pt-0.5">
+                    <RoleBadge role={profile.role} />
+                  </div>
+                )}
+              </div>
+            </DropdownMenuLabel>
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem onClick={() => navigate("/perfil")}>
+              <User className="mr-2 h-4 w-4 text-gray-500" />
+              Mi perfil
+            </DropdownMenuItem>
+
+            {profile?.role === "administrador" && (
+              <DropdownMenuItem onClick={() => navigate("/usuarios")}>
+                <Users2 className="mr-2 h-4 w-4 text-gray-500" />
+                Gestión de usuarios
+              </DropdownMenuItem>
+            )}
+
+            <DropdownMenuSeparator />
+
+            <DropdownMenuItem
+              onClick={handleSignOut}
+              className="text-red-600 focus:text-red-600 focus:bg-red-50"
+            >
+              <LogOut className="mr-2 h-4 w-4" />
+              Cerrar sesión
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
-  );
+  )
 }
 
 /* ── Layout ── */
 export default function Layout() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -244,5 +333,5 @@ export default function Layout() {
         </main>
       </div>
     </div>
-  );
+  )
 }
