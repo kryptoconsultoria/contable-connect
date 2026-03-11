@@ -1,30 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 220 25% 12%;
+    /* ── IntegrIA Solutions palette ── */
+    --integria-violet:        #7C3AED;
+    --integria-violet-mid:    #8B5CF6;
+    --integria-violet-light:  #A78BFA;
+    --integria-orange:        #F97316;
+    --integria-orange-light:  #FB923C;
+    --integria-bg:            #FFFFFF;
+    --integria-sidebar-bg:    #0F0F1A;
+    --integria-card-bg:       #F8F7FF;
+    --integria-text:          #1A1A2E;
+    --integria-text-muted:    #6B7280;
+    --integria-gradient:      linear-gradient(135deg, #7C3AED 0%, #F97316 100%);
+    --integria-shadow:        0 4px 24px 0 rgba(124, 58, 237, 0.15);
+    --integria-shadow-lg:     0 8px 40px 0 rgba(124, 58, 237, 0.22);
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 12%;
+    /* ── shadcn/ui tokens (mapped to IntegrIA palette) ── */
+    --background: 0 0% 100%;
+    --foreground: 240 40% 14%;
+
+    --card: 252 100% 99%;
+    --card-foreground: 240 40% 14%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 12%;
+    --popover-foreground: 240 40% 14%;
 
-    --primary: 220 70% 28%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 263 76% 57%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 18% 93%;
-    --secondary-foreground: 220 25% 20%;
+    --secondary: 252 60% 96%;
+    --secondary-foreground: 240 40% 20%;
 
-    --muted: 210 14% 95%;
-    --muted-foreground: 215 14% 46%;
+    --muted: 252 40% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 186 60% 38%;
+    --accent: 25 95% 53%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
@@ -36,24 +52,24 @@
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 10%;
 
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 220 70% 28%;
+    --border: 252 30% 88%;
+    --input: 252 30% 88%;
+    --ring: 263 76% 57%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 220 30% 16%;
-    --sidebar-foreground: 210 20% 85%;
-    --sidebar-primary: 186 60% 50%;
+    --sidebar-background: 240 56% 8%;
+    --sidebar-foreground: 252 20% 82%;
+    --sidebar-primary: 263 76% 65%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 28% 22%;
-    --sidebar-accent-foreground: 210 20% 92%;
-    --sidebar-border: 220 25% 22%;
-    --sidebar-ring: 186 60% 50%;
-    --sidebar-muted: 220 20% 30%;
+    --sidebar-accent: 240 40% 14%;
+    --sidebar-accent-foreground: 252 20% 92%;
+    --sidebar-border: 240 35% 16%;
+    --sidebar-ring: 263 76% 65%;
+    --sidebar-muted: 240 30% 20%;
 
-    --chart-1: 220 70% 28%;
-    --chart-2: 186 60% 38%;
+    --chart-1: 263 76% 57%;
+    --chart-2: 25 95% 53%;
     --chart-3: 152 60% 36%;
     --chart-4: 38 92% 50%;
     --chart-5: 0 72% 51%;
@@ -103,6 +119,11 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--integria-text);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
   }
 
   .font-mono {
@@ -165,6 +186,33 @@
 
   .sidebar-section-label {
     @apply text-[10px] uppercase tracking-widest font-semibold text-sidebar-foreground/50 px-3 pt-4 pb-1;
+  }
+
+  /* ── IntegrIA utility classes ── */
+
+  .gradient-text {
+    background: var(--integria-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200;
+    box-shadow: var(--integria-shadow);
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--integria-shadow-lg);
+  }
+
+  .badge-flujo {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold;
+    background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(249,115,22,0.12) 100%);
+    border: 1px solid rgba(124, 58, 237, 0.25);
+    color: var(--integria-violet);
   }
 }
 

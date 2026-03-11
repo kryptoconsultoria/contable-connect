@@ -13,6 +13,10 @@ import Bancos from "./pages/Bancos";
 import Conciliacion from "./pages/Conciliacion";
 import DIANConsulta from "./pages/DIANConsulta";
 import Configuracion from "./pages/Configuracion";
+import Causacion from "./pages/Causacion";
+import ServiciosPublicos from "./pages/ServiciosPublicos";
+import Combustible from "./pages/Combustible";
+import Leads from "./pages/Leads";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
@@ -34,6 +38,10 @@ const App = () => (
             <Route path="/terceros" element={<Terceros />} />
             <Route path="/cuentas" element={<CuentasContables />} />
             <Route path="/bancos" element={<Bancos />} />
+            <Route path="/causacion" element={<Causacion />} />
+            <Route path="/servicios-publicos" element={<ServiciosPublicos />} />
+            <Route path="/combustible" element={<Combustible />} />
+            <Route path="/leads" element={<Leads />} />
             <Route path="/conciliacion" element={<Conciliacion />} />
             <Route path="/dian" element={<DIANConsulta />} />
             <Route path="/configuracion" element={<Configuracion />} />
