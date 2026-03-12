@@ -15,6 +15,7 @@ import {
   X,
   LogOut,
   User,
+  Shield,
 } from "lucide-react"
 import {
   DropdownMenu,
@@ -44,6 +45,7 @@ const NAV_ITEMS: NavItem[] = [
   { icon: Fuel,            label: "Combustible",        to: "/combustible" },
   { icon: Users,           label: "Leads",              to: "/leads",             badge: { text: "Auto",  variant: "orange" } },
   { icon: ArrowLeftRight,  label: "Conciliación",       to: "/conciliacion",      badge: { text: "Pronto", variant: "gray" } },
+  { icon: Shield,          label: "Comparendos",        to: "/comparendos",       badge: { text: "IA",     variant: "orange" } },
   { icon: Settings,        label: "Configuración",      to: "/configuracion" },
 ]
 
@@ -58,6 +60,7 @@ const PAGE_TITLES: Record<string, string> = {
   "/combustible":        "Combustible",
   "/leads":              "Leads",
   "/conciliacion":       "Conciliación",
+  "/comparendos":        "Comparendos",
   "/configuracion":      "Configuración",
 }
 

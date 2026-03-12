@@ -22,6 +22,7 @@ import Leads from "./pages/Leads";
 import Login from "./pages/Login";
 import Usuarios from "./pages/Usuarios";
 import Perfil from "./pages/Perfil";
+import Comparendos from "./pages/Comparendos";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -53,6 +54,7 @@ const App = () => (
                 <Route path="/configuracion" element={<Configuracion />} />
                 <Route path="/usuarios" element={<Usuarios />} />
                 <Route path="/perfil" element={<Perfil />} />
+                <Route path="/comparendos" element={<Comparendos />} />
               </Route>
             </Route>
             <Route path="*" element={<NotFound />} />

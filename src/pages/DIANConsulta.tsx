@@ -54,7 +54,7 @@ const fmt = (v: number) =>
 /* ── Stepper ── */
 const STEPS = [
   { n: 1, label: "Sube Excel con CUFEs",  desc: "Archivo .xlsx con lista de CUFEs a consultar" },
-  { n: 2, label: "n8n consulta DIAN",     desc: "Robot RPA descarga documentos automáticamente" },
+  { n: 2, label: "Consulta automática DIAN", desc: "Robot RPA descarga documentos automáticamente" },
   { n: 3, label: "Facturas a Odoo",       desc: "Documentos validados se envían a contabilidad"  },
 ];
 
@@ -120,10 +120,10 @@ export default function DIANConsulta() {
       const res = await fetch(WEBHOOK_URL, { method: "POST", body: fd });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus("success");
-      toast({ title: "¡Proceso iniciado!", description: "n8n está consultando la DIAN. Los documentos se procesarán en breve." });
+      toast({ title: "¡Proceso iniciado!", description: "El sistema está consultando la DIAN. Los documentos se procesarán en breve." });
     } catch {
       setStatus("error");
-      toast({ title: "Error de conexión", description: "No se pudo conectar con n8n. Verifica el token y vuelve a intentar.", variant: "destructive" });
+      toast({ title: "Error de conexión", description: "No se pudo conectar con el sistema. Verifica el token y vuelve a intentar.", variant: "destructive" });
     }
   }
 
@@ -158,7 +158,7 @@ export default function DIANConsulta() {
           </span>
         </div>
         <p className="text-sm text-gray-500">
-          Automatiza la descarga de facturas electrónicas desde el portal DIAN usando n8n.
+          Automatiza la descarga de facturas electrónicas desde el portal DIAN.
         </p>
       </div>
 
@@ -209,7 +209,7 @@ export default function DIANConsulta() {
               ¡Proceso RPA iniciado!
             </h2>
             <p className="text-sm text-gray-500 max-w-sm">
-              n8n está consultando la DIAN y descargando los documentos. Recibirás una notificación al finalizar.
+              El sistema está consultando la DIAN y descargando los documentos. Recibirás una notificación al finalizar.
             </p>
           </div>
           <div className="flex items-center gap-3 mt-2">
