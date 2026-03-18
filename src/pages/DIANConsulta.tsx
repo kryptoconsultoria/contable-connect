@@ -174,7 +174,7 @@ export default function DIANConsulta() {
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 <div
                   className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white"
-                  style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+                  style={{ background: "#6D28D9" }}
                 >
                   {step.n}
                 </div>
@@ -227,7 +227,7 @@ export default function DIANConsulta() {
 
             {/* Card header */}
             <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2">
-              <Building2 size={16} className="text-violet-500" />
+              <Building2 size={16} style={{ color: "#6D28D9" }} />
               <h2
                 className="font-semibold text-gray-700 text-sm"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -249,8 +249,8 @@ export default function DIANConsulta() {
                     value={token}
                     onChange={(e) => { setToken(e.target.value); setErrors((p) => ({ ...p, token: "" })); }}
                     placeholder="Token de autenticación DIAN"
-                    className={`w-full rounded-xl border px-4 py-2.5 pr-10 text-sm text-gray-800 font-mono placeholder-gray-300 outline-none transition focus:ring-2 focus:ring-violet-400/40 ${
-                      errors.token ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-violet-400"
+                    className={`w-full rounded-xl border px-4 py-2.5 pr-10 text-sm text-gray-800 font-mono placeholder-gray-300 outline-none transition focus:ring-2 focus:ring-[#6D28D9]/20 ${
+                      errors.token ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-[#6D28D9]"
                     }`}
                   />
                   <button
@@ -275,8 +275,8 @@ export default function DIANConsulta() {
                   value={cliente}
                   onChange={(e) => { setCliente(e.target.value); setErrors((p) => ({ ...p, cliente: "" })); }}
                   placeholder="Nombre o NIT del cliente"
-                  className={`w-full rounded-xl border px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none transition focus:ring-2 focus:ring-violet-400/40 ${
-                    errors.cliente ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-violet-400"
+                  className={`w-full rounded-xl border px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none transition focus:ring-2 focus:ring-[#6D28D9]/20 ${
+                    errors.cliente ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-[#6D28D9]"
                   }`}
                 />
                 {errors.cliente && <p className="text-xs text-red-400">{errors.cliente}</p>}
@@ -294,10 +294,10 @@ export default function DIANConsulta() {
                   onDrop={onDrop}
                   className={`relative cursor-pointer rounded-xl border-2 border-dashed transition-all px-6 py-8 flex flex-col items-center gap-3 ${
                     dragging
-                      ? "border-violet-400 bg-violet-50/60"
+                      ? "border-[#6D28D9] bg-[#F3EEFF]/60"
                       : errors.archivo
                       ? "border-red-300 bg-red-50/20"
-                      : "border-gray-200 hover:border-violet-300 hover:bg-violet-50/30"
+                      : "border-gray-200 hover:border-[#6D28D9]/30 hover:bg-[#F3EEFF]/20"
                   }`}
                 >
                   {archivo ? (
@@ -321,7 +321,7 @@ export default function DIANConsulta() {
                       <div className="text-center">
                         <p className="text-sm font-medium text-gray-600">
                           Arrastra tu archivo o{" "}
-                          <span className="text-violet-500 underline">selecciónalo</span>
+                          <span className="underline" style={{ color: "#6D28D9" }}>selecciónalo</span>
                         </p>
                         <p className="text-xs text-gray-400 mt-1">.xlsx · .xls · .csv</p>
                       </div>
@@ -359,8 +359,7 @@ export default function DIANConsulta() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
-                style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+                className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors disabled:opacity-60"
               >
                 {status === "loading" ? (
                   <><Loader2 size={15} className="animate-spin" /> Procesando...</>
@@ -391,13 +390,13 @@ export default function DIANConsulta() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar por número, emisor o NIT..."
-              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 placeholder-gray-300 outline-none focus:ring-2 focus:ring-violet-400/40 focus:border-violet-400 transition"
+              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 placeholder-gray-300 outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition"
             />
           </div>
           <select
             value={estadoFilter}
             onChange={(e) => setEstadoFilter(e.target.value as typeof estadoFilter)}
-            className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-violet-400/40 focus:border-violet-400 bg-white transition"
+            className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] bg-white transition"
           >
             <option value="todos">Todos los estados</option>
             <option value="Aprobada">Aprobada</option>
@@ -429,7 +428,7 @@ export default function DIANConsulta() {
                     </td>
                   </tr>
                 ) : filtered.map((f) => (
-                  <tr key={f.id} className="hover:bg-violet-50/20 transition-colors">
+                  <tr key={f.id} className="hover:bg-gray-50/60 transition-colors">
                     <td className="px-5 py-3.5 font-mono text-xs font-medium text-gray-700">{f.numero}</td>
                     <td className="px-5 py-3.5 text-xs text-gray-500">{f.tipo}</td>
                     <td className="px-5 py-3.5">

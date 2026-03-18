@@ -142,7 +142,7 @@ function getFileType(file: File): "pdf" | "image" | "xml" {
 function FileTypeIcon({ tipo, size = 28 }: { tipo: "pdf" | "image" | "xml"; size?: number }) {
   if (tipo === "pdf") return <FileText size={size} className="text-red-400" />;
   if (tipo === "xml") return <Code size={size} className="text-blue-400" />;
-  return <Image size={size} className="text-violet-400" />;
+  return <Image size={size} style={{ color: "#6D28D9" }} />;
 }
 
 /* ── Excel download ── */
@@ -222,7 +222,7 @@ function DetalleFactura({
         <input
           value={datos[key]}
           onChange={(e) => onDatosChange({ ...datos, [key]: e.target.value })}
-          className={`w-full rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-violet-400/40 focus:border-violet-400 transition ${
+          className={`w-full rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition ${
             mono ? "font-mono" : ""
           }`}
         />
@@ -282,29 +282,28 @@ function DetalleFactura({
             value={datos.descripcion}
             onChange={(e) => onDatosChange({ ...datos, descripcion: e.target.value })}
             rows={3}
-            className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-violet-400/40 focus:border-violet-400 transition resize-none"
+            className="w-full rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-800 outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition resize-none"
           />
         </div>
 
         <div className="flex flex-wrap gap-2 pt-2">
           <button
             onClick={onAprobar}
-            className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+            className="flex items-center gap-1.5 px-5 py-2.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors"
           >
             <Send size={14} /> Aprobar y enviar a contabilidad
           </button>
           {onDescargarExcel && (
             <button
               onClick={onDescargarExcel}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium bg-white border border-[#E8E8ED] text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors"
             >
               <Download size={14} /> Descargar Excel
             </button>
           )}
           <button
             onClick={onDescartar}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-medium text-gray-500 border border-gray-200 hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-medium bg-white border border-[#E8E8ED] text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors"
           >
             <Trash2 size={14} /> Descartar
           </button>
@@ -537,10 +536,10 @@ export default function Facturas() {
               onDrop={onDrop}
               className={`relative rounded-2xl border-2 border-dashed transition-all flex flex-col items-center justify-center gap-3 py-12 ${
                 archivo
-                  ? "border-violet-300 bg-violet-50/30 cursor-default"
+                  ? "border-[#6D28D9]/40 bg-[#F3EEFF]/30 cursor-default"
                   : dragging
-                  ? "border-violet-400 bg-violet-50/60 cursor-copy"
-                  : "border-gray-200 hover:border-violet-300 hover:bg-violet-50/20 cursor-pointer"
+                  ? "border-[#6D28D9] bg-[#F3EEFF]/60 cursor-copy"
+                  : "border-gray-200 hover:border-[#6D28D9]/30 hover:bg-[#F3EEFF]/20 cursor-pointer"
               }`}
             >
               {archivo ? (
@@ -572,7 +571,7 @@ export default function Facturas() {
                   <button
                     type="button"
                     onClick={(e) => { e.stopPropagation(); fileRef.current?.click(); }}
-                    className="mt-1 px-4 py-2 rounded-xl border border-gray-200 text-sm text-gray-600 hover:bg-gray-50 transition-colors"
+                    className="mt-1 px-4 py-2 rounded-lg bg-white border border-[#E8E8ED] text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors"
                   >
                     Seleccionar archivo
                   </button>
@@ -600,8 +599,7 @@ export default function Facturas() {
               <button
                 onClick={handleExtract}
                 disabled={!archivo || uploadStatus === "loading"}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-40"
-                style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+                className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors disabled:opacity-40"
               >
                 {uploadStatus === "loading" ? (
                   <><Loader2 size={15} className="animate-spin" /> Extrayendo información...</>
@@ -684,18 +682,17 @@ export default function Facturas() {
 
         {/* Bulk action bar */}
         {selected.size > 0 && (
-          <div className="flex items-center gap-3 mb-3 px-4 py-3 bg-violet-50 border border-violet-200 rounded-xl text-sm">
-            <span className="font-medium text-violet-700">{selected.size} seleccionada(s)</span>
+          <div className="flex items-center gap-3 mb-3 px-4 py-3 rounded-xl text-sm" style={{ background: "#F3EEFF", border: "1px solid #DDD6FE" }}>
+            <span className="font-medium" style={{ color: "#6D28D9" }}>{selected.size} seleccionada(s)</span>
             <button
               onClick={enviarSeleccionadas}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors"
             >
               <Send size={13} /> Enviar a contabilidad
             </button>
             <button
               onClick={() => descargarExcel(historial.filter((f) => selected.has(f.id)))}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg border border-violet-300 text-violet-700 text-sm hover:bg-violet-100 transition-colors"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm bg-white border border-[#E8E8ED] text-[#1D1D1F] hover:bg-[#F5F5F7] transition-colors"
             >
               <Download size={13} /> Descargar Excel
             </button>
@@ -731,7 +728,7 @@ export default function Facturas() {
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {historial.map((f) => (
-                  <tr key={f.id} className="hover:bg-violet-50/20 transition-colors">
+                  <tr key={f.id} className="hover:bg-gray-50/60 transition-colors">
                     <td className="px-4 py-3.5">
                       <Checkbox
                         checked={selected.has(f.id)}
@@ -765,7 +762,9 @@ export default function Facturas() {
                     <td className="px-4 py-3.5">
                       <button
                         onClick={() => openDialog(f)}
-                        className="flex items-center gap-1 text-xs text-violet-500 hover:text-violet-700 font-medium transition-colors"
+                        className="flex items-center gap-1 text-xs font-medium transition-colors" style={{ color: "#6D28D9" }}
+                        onMouseEnter={(e) => (e.currentTarget.style.color = "#5B21B6")}
+                        onMouseLeave={(e) => (e.currentTarget.style.color = "#6D28D9")}
                       >
                         <Eye size={13} /> Ver detalle
                       </button>

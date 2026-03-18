@@ -12,30 +12,24 @@ export default function Causacion() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-3 mb-1">
-          <h1
-            className="text-2xl font-bold text-gray-800"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-          >
+          <h1 className="text-xl font-semibold" style={{ color: "#1D1D1F" }}>
             Causación Contable
           </h1>
-          <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border bg-violet-500/15 text-violet-500 border-violet-500/25">
-            n8n
+          <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full" style={{ color: "#6D28D9", background: "#F3EEFF", border: "1px solid #DDD6FE" }}>
+            Auto
           </span>
         </div>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm" style={{ color: "#6E6E73" }}>
           Extracción inteligente de datos contables desde facturas procesadas. El flujo genera
           asientos automáticos según el plan de cuentas PUC configurado.
         </p>
       </div>
 
       {/* Info card */}
-      <div className="bg-white rounded-2xl border border-violet-100 shadow-sm overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2">
-          <BookCheck size={16} className="text-violet-500" />
-          <h2
-            className="font-semibold text-gray-700 text-sm"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-          >
+      <div className="bg-white rounded-2xl overflow-hidden" style={{ border: "1px solid #E8E8ED", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
+        <div className="px-6 py-4 flex items-center gap-2" style={{ borderBottom: "1px solid #F0F0F5" }}>
+          <BookCheck size={16} style={{ color: "#6D28D9" }} />
+          <h2 className="font-semibold text-sm" style={{ color: "#1D1D1F" }}>
             Flujo de causación
           </h2>
         </div>
@@ -43,8 +37,8 @@ export default function Causacion() {
         <div className="p-10 flex flex-col items-center text-center gap-5">
           {/* Icon */}
           <div className="relative">
-            <div className="w-20 h-20 rounded-2xl bg-violet-50 flex items-center justify-center">
-              <BookCheck size={36} className="text-violet-400" />
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center" style={{ background: "#F3EEFF" }}>
+              <BookCheck size={36} style={{ color: "#6D28D9" }} />
             </div>
             <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-orange-400 flex items-center justify-center">
               <AlertCircle size={13} className="text-white" />
@@ -52,15 +46,12 @@ export default function Causacion() {
           </div>
 
           <div className="max-w-md">
-            <h3
-              className="text-lg font-bold text-gray-800 mb-2"
-              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-            >
+            <h3 className="text-lg font-semibold mb-2" style={{ color: "#1D1D1F" }}>
               Conecta el flujo de Facturas primero
             </h3>
-            <p className="text-sm text-gray-500 leading-relaxed">
+            <p className="text-sm leading-relaxed" style={{ color: "#6E6E73" }}>
               La causación contable requiere que el flujo de{" "}
-              <strong className="text-gray-700">Extracción de Facturas</strong> haya procesado al
+              <strong style={{ color: "#1D1D1F" }}>Extracción de Facturas</strong> haya procesado al
               menos un documento. Ve al módulo de Facturas, carga tus documentos y regresa aquí
               para iniciar la causación automática.
             </p>
@@ -69,8 +60,7 @@ export default function Causacion() {
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-2">
             <button
               onClick={() => navigate("/facturas")}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90"
-              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+              className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white transition-colors bg-[#6D28D9] hover:bg-[#5B21B6]"
             >
               <FileText size={15} />
               Ir a Facturas
@@ -78,7 +68,8 @@ export default function Causacion() {
             </button>
             <button
               disabled
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-medium text-gray-400 border border-gray-200 cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium cursor-not-allowed"
+              style={{ color: "#AEAEB2", border: "1px solid #E8E8ED", background: "#FAFAFA" }}
             >
               Iniciar causación
             </button>
@@ -88,17 +79,17 @@ export default function Causacion() {
           <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full max-w-lg">
             {[
               { n: 1, text: "Sube facturas en el módulo Facturas" },
-              { n: 2, text: "n8n extrae y valida los datos" },
+              { n: 2, text: "El flujo extrae y valida los datos" },
               { n: 3, text: "Se generan asientos PUC automáticos" },
             ].map((s) => (
-              <div key={s.n} className="flex-1 bg-gray-50 rounded-xl px-4 py-3 text-left">
+              <div key={s.n} className="flex-1 rounded-xl px-4 py-3 text-left" style={{ background: "#F5F5F7" }}>
                 <span
                   className="inline-flex w-5 h-5 rounded-full text-[10px] font-bold text-white items-center justify-center mb-1.5"
-                  style={{ background: "linear-gradient(135deg, #7C3AED, #F97316)" }}
+                  style={{ background: "#6D28D9" }}
                 >
                   {s.n}
                 </span>
-                <p className="text-xs text-gray-500">{s.text}</p>
+                <p className="text-xs" style={{ color: "#6E6E73" }}>{s.text}</p>
               </div>
             ))}
           </div>
@@ -107,21 +98,19 @@ export default function Causacion() {
 
       {/* Empty table */}
       <section>
-        <h2
-          className="text-base font-semibold text-gray-700 mb-4"
-          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-        >
+        <h2 className="text-[15px] font-semibold mb-4" style={{ color: "#1D1D1F" }}>
           Registros causados
         </h2>
-        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm">
+        <div className="bg-white rounded-2xl overflow-hidden" style={{ border: "1px solid #E8E8ED", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-50 bg-gray-50/60">
+                <tr style={{ borderBottom: "1px solid #F0F0F5", background: "#FAFAFA" }}>
                   {COLUMNS.map((h) => (
                     <th
                       key={h}
-                      className="text-left px-5 py-3 text-[11px] font-semibold text-gray-400 uppercase tracking-wider"
+                      className="text-left px-5 py-3 text-[11px] font-semibold uppercase tracking-wider"
+                      style={{ color: "#6E6E73" }}
                     >
                       {h}
                     </th>
@@ -132,11 +121,11 @@ export default function Causacion() {
                 <tr>
                   <td colSpan={COLUMNS.length} className="px-5 py-14 text-center">
                     <div className="flex flex-col items-center gap-2">
-                      <BookCheck size={28} className="text-gray-200" />
-                      <p className="text-sm text-gray-400">
+                      <BookCheck size={28} style={{ color: "#E8E8ED" }} />
+                      <p className="text-sm" style={{ color: "#AEAEB2" }}>
                         No hay registros causados aún.
                       </p>
-                      <p className="text-xs text-gray-300">
+                      <p className="text-xs" style={{ color: "#AEAEB2" }}>
                         Procesa facturas primero para ver los asientos aquí.
                       </p>
                     </div>

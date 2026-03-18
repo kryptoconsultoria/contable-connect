@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog"
 
 const ROLE_BADGE: Record<string, { bg: string; color: string; label: string }> = {
-  administrador: { bg: "#7C3AED", color: "#fff", label: "Administrador" },
+  administrador: { bg: "#6D28D9", color: "#fff", label: "Administrador" },
   operador:      { bg: "#F97316", color: "#fff", label: "Operador"      },
   visualizador:  { bg: "#2563EB", color: "#fff", label: "Visualizador"  },
   cliente:       { bg: "#16A34A", color: "#fff", label: "Cliente"       },
@@ -93,7 +93,7 @@ export default function Perfil() {
           {/* Avatar */}
           <div
             className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold text-white shrink-0"
-            style={{ background: "#7C3AED" }}
+            style={{ background: "#6D28D9" }}
           >
             {initials}
           </div>
@@ -148,7 +148,7 @@ export default function Perfil() {
             onClick={handleSaveName}
             disabled={savingName}
             className="text-white"
-            style={{ background: "#7C3AED" }}
+            style={{ background: "#6D28D9" }}
           >
             {savingName ? "Guardando..." : "Guardar cambios"}
           </Button>
@@ -158,7 +158,7 @@ export default function Perfil() {
       {/* Seguridad */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
         <div className="flex items-center gap-2">
-          <Shield size={16} style={{ color: "#7C3AED" }} />
+          <Shield size={16} style={{ color: "#6D28D9" }} />
           <h2 className="text-sm font-semibold" style={{ color: "#1A1A2E" }}>Seguridad</h2>
         </div>
 
@@ -213,7 +213,7 @@ export default function Perfil() {
               onClick={handleChangePassword}
               disabled={savingPwd}
               className="text-white"
-              style={{ background: "#7C3AED" }}
+              style={{ background: "#6D28D9" }}
             >
               {savingPwd ? "Actualizando..." : "Actualizar"}
             </Button>

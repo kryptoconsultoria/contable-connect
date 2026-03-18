@@ -22,7 +22,7 @@ import { Label } from "@/components/ui/label"
 
 /* ── Role badge ── */
 const ROLE_BADGE: Record<string, { bg: string; color: string; label: string }> = {
-  administrador: { bg: "#7C3AED", color: "#fff", label: "Administrador" },
+  administrador: { bg: "#6D28D9", color: "#fff", label: "Administrador" },
   operador:      { bg: "#F97316", color: "#fff", label: "Operador"      },
   visualizador:  { bg: "#2563EB", color: "#fff", label: "Visualizador"  },
   cliente:       { bg: "#16A34A", color: "#fff", label: "Cliente"       },
@@ -45,7 +45,7 @@ function Initials({ name }: { name: string }) {
   return (
     <div
       className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-      style={{ background: "#7C3AED" }}
+      style={{ background: "#6D28D9" }}
     >
       {ini || "?"}
     </div>
@@ -160,7 +160,7 @@ function NuevoUsuarioModal({ open, onClose, onCreated }: NuevoModalProps) {
           <Button variant="outline" onClick={() => { reset(); onClose() }} disabled={loading}>
             Cancelar
           </Button>
-          <Button onClick={handleCreate} disabled={loading} style={{ background: "#7C3AED" }}>
+          <Button onClick={handleCreate} disabled={loading} style={{ background: "#6D28D9" }}>
             {loading ? "Creando..." : "Crear Usuario"}
           </Button>
         </DialogFooter>
@@ -246,7 +246,7 @@ function EditarUsuarioModal({ user, onClose, onUpdated }: EditarModalProps) {
           <Button variant="outline" onClick={onClose} disabled={loading}>
             Cancelar
           </Button>
-          <Button onClick={handleSave} disabled={loading} style={{ background: "#7C3AED" }}>
+          <Button onClick={handleSave} disabled={loading} style={{ background: "#6D28D9" }}>
             {loading ? "Guardando..." : "Guardar cambios"}
           </Button>
         </DialogFooter>
@@ -303,9 +303,9 @@ export default function Usuarios() {
         <div className="flex items-center gap-3">
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-            style={{ background: "rgba(124,58,237,0.12)" }}
+            style={{ background: "rgba(109,40,217,0.1)" }}
           >
-            <Users2 size={20} style={{ color: "#7C3AED" }} />
+            <Users2 size={20} style={{ color: "#6D28D9" }} />
           </div>
           <div>
             <h1 className="text-xl font-bold" style={{ color: "#1A1A2E" }}>
@@ -319,7 +319,7 @@ export default function Usuarios() {
         <Button
           onClick={() => setShowNuevo(true)}
           className="flex items-center gap-2 text-white shrink-0"
-          style={{ background: "#7C3AED" }}
+          style={{ background: "#6D28D9" }}
         >
           <UserPlus size={16} />
           Nuevo Usuario
@@ -345,7 +345,7 @@ export default function Usuarios() {
                 <tr>
                   <td colSpan={6} className="py-16 text-center">
                     <div className="flex flex-col items-center gap-3">
-                      <div className="w-7 h-7 rounded-full border-4 border-violet-500 border-t-transparent animate-spin" />
+                      <div className="w-7 h-7 rounded-full border-4 border-t-transparent animate-spin" style={{ borderColor: "#6D28D9", borderTopColor: "transparent" }} />
                       <span className="text-sm text-gray-400">Cargando usuarios...</span>
                     </div>
                   </td>
@@ -386,10 +386,10 @@ export default function Usuarios() {
                       <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => setEditing(u)}
-                          className="p-1.5 rounded-lg transition-colors hover:bg-violet-50"
+                          className="p-1.5 rounded-lg transition-colors hover:bg-[#F3EEFF]"
                           title="Editar usuario"
                         >
-                          <Pencil size={15} style={{ color: "#7C3AED" }} />
+                          <Pencil size={15} style={{ color: "#6D28D9" }} />
                         </button>
                         <button
                           onClick={() => handleDeactivate(u)}

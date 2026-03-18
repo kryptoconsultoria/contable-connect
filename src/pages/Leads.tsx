@@ -40,7 +40,7 @@ const ESTADO_STYLES: Record<CampaignRow["estado"], string> = {
   Completado:  "bg-emerald-500/15 text-emerald-500 border-emerald-500/25",
   "En proceso":"bg-amber-500/15   text-amber-500   border-amber-500/25",
   Error:       "bg-red-500/15     text-red-500     border-red-500/25",
-  Programado:  "bg-violet-500/15  text-violet-500  border-violet-500/25",
+  Programado:  "text-[#6D28D9] border-[#DDD6FE]",
 };
 
 const ESTADO_ICONS: Record<CampaignRow["estado"], React.ElementType> = {
@@ -197,8 +197,7 @@ export default function Leads() {
           </div>
           <button
             onClick={handleReset}
-            className="mt-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90"
-            style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+            className="mt-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors"
           >
             Nueva campaña
           </button>
@@ -209,7 +208,7 @@ export default function Leads() {
 
             {/* Card header */}
             <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2">
-              <MessageSquare size={16} className="text-violet-500" />
+              <MessageSquare size={16} style={{ color: "#6D28D9" }} />
               <h2
                 className="font-semibold text-gray-700 text-sm"
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -230,8 +229,8 @@ export default function Leads() {
                   value={campana}
                   onChange={(e) => { setCampana(e.target.value); setErrors((p) => ({ ...p, campana: "" })); }}
                   placeholder="Ej: Renovación Clientes Q2 2026"
-                  className={`w-full rounded-xl border px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none transition focus:ring-2 focus:ring-violet-400/40 ${
-                    errors.campana ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-violet-400"
+                  className={`w-full rounded-xl border px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none transition focus:ring-2 focus:ring-[#6D28D9]/20 ${
+                    errors.campana ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-[#6D28D9]"
                   }`}
                 />
                 {errors.campana && <p className="text-xs text-red-400">{errors.campana}</p>}
@@ -249,10 +248,10 @@ export default function Leads() {
                   onDrop={handleDrop}
                   className={`relative cursor-pointer rounded-xl border-2 border-dashed transition-all px-6 py-8 flex flex-col items-center gap-3 ${
                     dragging
-                      ? "border-violet-400 bg-violet-50/60"
+                      ? "border-[#6D28D9] bg-[#F3EEFF]/60"
                       : errors.archivo
                       ? "border-red-300 bg-red-50/20"
-                      : "border-gray-200 hover:border-violet-300 hover:bg-violet-50/30"
+                      : "border-gray-200 hover:border-[#6D28D9]/30 hover:bg-[#F3EEFF]/20"
                   }`}
                 >
                   {archivo ? (
@@ -277,7 +276,7 @@ export default function Leads() {
                       <Upload size={28} className="text-gray-300" />
                       <div className="text-center">
                         <p className="text-sm font-medium text-gray-600">
-                          Arrastra tu archivo aquí o <span className="text-violet-500 underline">selecciónalo</span>
+                          Arrastra tu archivo aquí o <span className="underline" style={{ color: "#6D28D9" }}>selecciónalo</span>
                         </p>
                         <p className="text-xs text-gray-400 mt-1">
                           Formatos aceptados: .xlsx, .xls, .csv
@@ -311,12 +310,12 @@ export default function Leads() {
                   value={mensaje}
                   onChange={(e) => { setMensaje(e.target.value); setErrors((p) => ({ ...p, mensaje: "" })); }}
                   placeholder="Hola {nombre}, te contactamos de IntegrIA Solutions..."
-                  className={`w-full rounded-xl border px-4 py-3 text-sm text-gray-800 placeholder-gray-300 outline-none resize-none transition focus:ring-2 focus:ring-violet-400/40 ${
-                    errors.mensaje ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-violet-400"
+                  className={`w-full rounded-xl border px-4 py-3 text-sm text-gray-800 placeholder-gray-300 outline-none resize-none transition focus:ring-2 focus:ring-[#6D28D9]/20 ${
+                    errors.mensaje ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-[#6D28D9]"
                   }`}
                 />
                 <p className="text-xs text-gray-400">
-                  Usa <code className="bg-gray-100 px-1 py-0.5 rounded text-violet-600 text-[11px]">{"{nombre}"}</code> para personalizar con el nombre del contacto.
+                  Usa <code className="bg-gray-100 px-1 py-0.5 rounded text-[11px]" style={{ color: "#6D28D9" }}>{"{nombre}"}</code> para personalizar con el nombre del contacto.
                 </p>
                 {errors.mensaje && <p className="text-xs text-red-400">{errors.mensaje}</p>}
               </div>
@@ -329,7 +328,7 @@ export default function Leads() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <label
                     className={`flex-1 flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all ${
-                      enviarAhora ? "border-violet-400 bg-violet-50/40" : "border-gray-200 hover:border-gray-300"
+                      enviarAhora ? "border-[#6D28D9] bg-[#F3EEFF]/40" : "border-gray-200 hover:border-gray-300"
                     }`}
                   >
                     <input
@@ -337,7 +336,7 @@ export default function Leads() {
                       name="programacion"
                       checked={enviarAhora}
                       onChange={() => setEnviarAhora(true)}
-                      className="accent-violet-600"
+                      className="accent-[#6D28D9]"
                     />
                     <div>
                       <p className="text-sm font-medium text-gray-700">Enviar ahora</p>
@@ -346,7 +345,7 @@ export default function Leads() {
                   </label>
                   <label
                     className={`flex-1 flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all ${
-                      !enviarAhora ? "border-violet-400 bg-violet-50/40" : "border-gray-200 hover:border-gray-300"
+                      !enviarAhora ? "border-[#6D28D9] bg-[#F3EEFF]/40" : "border-gray-200 hover:border-gray-300"
                     }`}
                   >
                     <input
@@ -354,7 +353,7 @@ export default function Leads() {
                       name="programacion"
                       checked={!enviarAhora}
                       onChange={() => setEnviarAhora(false)}
-                      className="accent-violet-600"
+                      className="accent-[#6D28D9]"
                     />
                     <div>
                       <p className="text-sm font-medium text-gray-700">Programar envío</p>
@@ -369,8 +368,8 @@ export default function Leads() {
                       type="datetime-local"
                       value={fecha}
                       onChange={(e) => { setFecha(e.target.value); setErrors((p) => ({ ...p, fecha: "" })); }}
-                      className={`w-full rounded-xl border px-4 py-2.5 text-sm text-gray-700 outline-none transition focus:ring-2 focus:ring-violet-400/40 ${
-                        errors.fecha ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-violet-400"
+                      className={`w-full rounded-xl border px-4 py-2.5 text-sm text-gray-700 outline-none transition focus:ring-2 focus:ring-[#6D28D9]/20 ${
+                        errors.fecha ? "border-red-400 bg-red-50/30" : "border-gray-200 focus:border-[#6D28D9]"
                       }`}
                     />
                     {errors.fecha && <p className="text-xs text-red-400">{errors.fecha}</p>}
@@ -392,7 +391,7 @@ export default function Leads() {
                 type="submit"
                 disabled={loading}
                 className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
-                style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+                className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors disabled:opacity-60"
               >
                 {loading ? (
                   <>
@@ -439,7 +438,7 @@ export default function Leads() {
                   const Icon = ESTADO_ICONS[row.estado];
                   const pct = row.contactos > 0 ? Math.round((row.enviados / row.contactos) * 100) : 0;
                   return (
-                    <tr key={row.id} className="hover:bg-violet-50/20 transition-colors">
+                    <tr key={row.id} className="hover:bg-gray-50/60 transition-colors">
                       <td className="px-5 py-3.5 font-mono text-xs text-gray-400">{row.id}</td>
                       <td className="px-5 py-3.5 font-medium text-gray-700">{row.nombre}</td>
                       <td className="px-5 py-3.5 text-xs text-gray-500">{row.fecha}</td>
@@ -454,7 +453,7 @@ export default function Leads() {
                                 width: `${pct}%`,
                                 background: row.estado === "Error"
                                   ? "#EF4444"
-                                  : "linear-gradient(90deg, #7C3AED, #F97316)",
+                                  : "#6D28D9",
                               }}
                             />
                           </div>
