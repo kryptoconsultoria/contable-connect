@@ -58,7 +58,7 @@ export default function Combustible() {
         {/* ── Calculadora de ruta ── */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-2">
-            <Navigation size={16} className="text-violet-500" />
+            <Navigation size={16} style={{ color: "#6D28D9" }} />
             <h2
               className="font-semibold text-gray-700 text-sm"
               style={{ fontFamily: "'Space Grotesk', sans-serif" }}
@@ -72,14 +72,14 @@ export default function Combustible() {
             {/* Origen */}
             <div className="space-y-1.5">
               <label className="text-xs font-semibold text-gray-600 uppercase tracking-wide flex items-center gap-1.5">
-                <MapPin size={12} className="text-violet-400" /> Origen
+                <MapPin size={12} style={{ color: "#6D28D9" }} /> Origen
               </label>
               <input
                 type="text"
                 value={origen}
                 onChange={(e) => setOrigen(e.target.value)}
                 placeholder="Ciudad o dirección de salida"
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none focus:ring-2 focus:ring-violet-400/40 focus:border-violet-400 transition"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition"
               />
             </div>
 
@@ -93,7 +93,7 @@ export default function Combustible() {
                 value={destino}
                 onChange={(e) => setDestino(e.target.value)}
                 placeholder="Ciudad o dirección de llegada"
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none focus:ring-2 focus:ring-violet-400/40 focus:border-violet-400 transition"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition"
               />
             </div>
 
@@ -105,7 +105,7 @@ export default function Combustible() {
               <select
                 value={vehiculo}
                 onChange={(e) => setVehiculo(e.target.value)}
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-violet-400/40 focus:border-violet-400 bg-white transition"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-700 outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] bg-white transition"
               >
                 <option value="">Seleccionar tipo...</option>
                 {VEHICLE_TYPES.map((v) => (
@@ -126,22 +126,22 @@ export default function Combustible() {
                 value={consumo}
                 onChange={(e) => setConsumo(e.target.value)}
                 placeholder="Ej: 35"
-                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none focus:ring-2 focus:ring-violet-400/40 focus:border-violet-400 transition"
+                className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm text-gray-800 placeholder-gray-300 outline-none focus:ring-2 focus:ring-[#6D28D9]/20 focus:border-[#6D28D9] transition"
               />
             </div>
 
             {/* Result placeholder */}
             {canCalculate && (
-              <div className="bg-violet-50/60 rounded-xl border border-violet-100 px-4 py-3 flex items-center justify-between">
+              <div className="rounded-xl px-4 py-3 flex items-center justify-between" style={{ background: "#F3EEFF", border: "1px solid #DDD6FE" }}>
                 <div>
-                  <p className="text-xs text-violet-500 font-medium">Estimado de combustible</p>
-                  <p className="text-lg font-bold text-violet-700" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  <p className="text-xs font-medium" style={{ color: "#6D28D9" }}>Estimado de combustible</p>
+                  <p className="text-lg font-bold" style={{ color: "#6D28D9", fontFamily: "'Space Grotesk', sans-serif" }}>
                     — gal
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-violet-500 font-medium">Distancia estimada</p>
-                  <p className="text-lg font-bold text-violet-700" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  <p className="text-xs font-medium" style={{ color: "#6D28D9" }}>Distancia estimada</p>
+                  <p className="text-lg font-bold" style={{ color: "#6D28D9", fontFamily: "'Space Grotesk', sans-serif" }}>
                     — km
                   </p>
                 </div>
@@ -150,8 +150,7 @@ export default function Combustible() {
 
             <button
               disabled={!canCalculate}
-              className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+              className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <Zap size={15} />
               Calcular Ruta
@@ -240,8 +239,7 @@ export default function Combustible() {
 
             <button
               disabled={!factura}
-              className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+              className="w-full flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <Fuel size={15} />
               Registrar factura

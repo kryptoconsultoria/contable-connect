@@ -129,8 +129,7 @@ export default function ServiciosPublicos() {
           <div className="flex justify-end pt-2">
             <button
               disabled={files.length === 0}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed"
-              style={{ background: "linear-gradient(135deg, #7C3AED 0%, #F97316 100%)" }}
+              className="flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold bg-[#6D28D9] hover:bg-[#5B21B6] text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <Zap size={15} />
               Procesar con IA
