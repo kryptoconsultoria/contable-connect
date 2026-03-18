@@ -32,21 +32,47 @@ interface NavItem {
   icon: React.ElementType
   label: string
   to: string
-  badge?: { text: string; variant: "orange" | "violet" | "gray" }
+  badge?: { text: string; variant: "ia" | "rpa" | "auto" | "soon" }
+  adminOnly?: boolean
 }
 
-/* ── Nav items ── */
-const NAV_ITEMS: NavItem[] = [
-  { icon: LayoutDashboard, label: "Dashboard",          to: "/" },
-  { icon: FileText,        label: "Facturas",           to: "/facturas",          badge: { text: "IA",    variant: "orange" } },
-  { icon: BookCheck,       label: "Causación",          to: "/causacion",         badge: { text: "Auto",  variant: "violet" } },
-  { icon: Building2,       label: "DIAN",               to: "/dian",              badge: { text: "RPA",   variant: "orange" } },
-  { icon: Zap,             label: "Servicios Públicos", to: "/servicios-publicos" },
-  { icon: Fuel,            label: "Combustible",        to: "/combustible" },
-  { icon: Users,           label: "Leads",              to: "/leads",             badge: { text: "Auto",  variant: "orange" } },
-  { icon: ArrowLeftRight,  label: "Conciliación",       to: "/conciliacion",      badge: { text: "Pronto", variant: "gray" } },
-  { icon: Shield,          label: "Comparendos",        to: "/comparendos",       badge: { text: "IA",     variant: "orange" } },
-  { icon: Settings,        label: "Configuración",      to: "/configuracion" },
+interface NavGroup {
+  label?: string
+  items: NavItem[]
+}
+
+/* ── Nav groups ── */
+const NAV_GROUPS: NavGroup[] = [
+  {
+    items: [
+      { icon: LayoutDashboard, label: "Dashboard", to: "/" },
+    ],
+  },
+  {
+    label: "OPERACIONES",
+    items: [
+      { icon: Fuel,           label: "Combustible",        to: "/combustible",       badge: { text: "Auto", variant: "auto" } },
+      { icon: Zap,            label: "Servicios Públicos", to: "/servicios-publicos" },
+      { icon: Shield,         label: "Comparendos",        to: "/comparendos",       badge: { text: "IA",   variant: "ia"   } },
+      { icon: Users,          label: "Leads Comerciales",  to: "/leads",             badge: { text: "Auto", variant: "auto" } },
+    ],
+  },
+  {
+    label: "ADMINISTRATIVO Y FINANCIERO",
+    items: [
+      { icon: BookCheck,      label: "Causación",    to: "/causacion",    badge: { text: "Auto",  variant: "auto" } },
+      { icon: Building2,      label: "DIAN",         to: "/dian",         badge: { text: "RPA",   variant: "rpa"  } },
+      { icon: FileText,       label: "Facturas",     to: "/facturas",     badge: { text: "IA",    variant: "ia"   } },
+      { icon: ArrowLeftRight, label: "Conciliación", to: "/conciliacion", badge: { text: "Pronto", variant: "soon" } },
+    ],
+  },
+  {
+    label: "SISTEMA",
+    items: [
+      { icon: Settings, label: "Configuración", to: "/configuracion" },
+      { icon: Users2,   label: "Usuarios",      to: "/usuarios",     adminOnly: true },
+    ],
+  },
 ]
 
 /* ── Page titles ── */
@@ -65,36 +91,51 @@ const PAGE_TITLES: Record<string, string> = {
 }
 
 /* ── Badge styles ── */
-const BADGE: Record<string, React.CSSProperties & { className: string }> = {
-  orange: {
-    className: "text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none",
-    background: "rgba(249,115,22,0.2)",
-    color: "#F97316",
-    border: "1px solid rgba(249,115,22,0.3)",
+type BadgeVariant = "ia" | "rpa" | "auto" | "soon"
+
+const BADGE_STYLES: Record<BadgeVariant, React.CSSProperties> = {
+  ia: {
+    color: "#EA580C",
+    background: "#FFF4EE",
+    border: "1px solid #FDDCCC",
   },
-  violet: {
-    className: "text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none",
-    background: "rgba(124,58,237,0.2)",
-    color: "#A78BFA",
-    border: "1px solid rgba(124,58,237,0.3)",
+  rpa: {
+    color: "#16A34A",
+    background: "#F0FDF4",
+    border: "1px solid #BBF7D0",
   },
-  gray: {
-    className: "text-[10px] font-semibold px-1.5 py-0.5 rounded-full leading-none",
-    background: "rgba(255,255,255,0.08)",
-    color: "rgba(255,255,255,0.35)",
-    border: "1px solid rgba(255,255,255,0.12)",
+  auto: {
+    color: "#6D28D9",
+    background: "#F3EEFF",
+    border: "1px solid #DDD6FE",
   },
+  soon: {
+    color: "#AEAEB2",
+    background: "#F5F5F7",
+    border: "1px solid #E8E8ED",
+  },
+}
+
+function NavBadge({ variant, text }: { variant: BadgeVariant; text: string }) {
+  return (
+    <span
+      className="text-[9px] font-semibold px-1.5 py-0.5 rounded-full leading-none"
+      style={BADGE_STYLES[variant]}
+    >
+      {text}
+    </span>
+  )
 }
 
 /* ── Role badge ── */
 function RoleBadge({ role }: { role: string }) {
   const styles: Record<string, { bg: string; color: string; label: string }> = {
-    administrador: { bg: "#7C3AED", color: "#fff",     label: "Administrador" },
-    operador:      { bg: "#F97316", color: "#fff",     label: "Operador"      },
-    visualizador:  { bg: "#2563EB", color: "#fff",     label: "Visualizador"  },
-    cliente:       { bg: "#16A34A", color: "#fff",     label: "Cliente"       },
+    administrador: { bg: "#F3EEFF", color: "#6D28D9", label: "Administrador" },
+    operador:      { bg: "#FFF4EE", color: "#EA580C", label: "Operador"      },
+    visualizador:  { bg: "#EFF6FF", color: "#2563EB", label: "Visualizador"  },
+    cliente:       { bg: "#F0FDF4", color: "#16A34A", label: "Cliente"       },
   }
-  const s = styles[role] ?? { bg: "#6B7280", color: "#fff", label: role }
+  const s = styles[role] ?? { bg: "#F5F5F7", color: "#6E6E73", label: role }
   return (
     <span
       className="text-[10px] font-semibold px-2 py-0.5 rounded-full"
@@ -108,25 +149,30 @@ function RoleBadge({ role }: { role: string }) {
 /* ── Sidebar ── */
 function Sidebar({ onClose }: { onClose?: () => void }) {
   const location = useLocation()
+  const { profile } = useAuth()
 
   return (
     <aside
-      className="flex flex-col h-full w-[260px] shrink-0"
-      style={{ background: "#0F0F1A" }}
+      className="flex flex-col h-full shrink-0"
+      style={{
+        width: "240px",
+        background: "#FFFFFF",
+        borderRight: "1px solid #E8E8ED",
+      }}
     >
       {/* Logo */}
       <div
-        className="flex items-center justify-between px-6 py-5"
-        style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        className="flex items-center justify-between px-5 py-5"
+        style={{ borderBottom: "1px solid #E8E8ED" }}
       >
         <div className="flex flex-col leading-tight">
-          <span
-            className="text-2xl font-bold"
-            style={{ color: "#7C3AED" }}
-          >
+          <span className="text-xl font-bold" style={{ color: "#1D1D1F" }}>
             IntegrIA
           </span>
-          <span className="text-[11px] tracking-widest uppercase" style={{ color: "#6B7280" }}>
+          <span
+            className="text-[10px] tracking-widest uppercase"
+            style={{ color: "#AEAEB2" }}
+          >
             Solutions
           </span>
         </div>
@@ -134,68 +180,94 @@ function Sidebar({ onClose }: { onClose?: () => void }) {
         {onClose && (
           <button
             onClick={onClose}
-            className="lg:hidden transition-colors"
-            style={{ color: "rgba(255,255,255,0.4)" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.8)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}
+            className="lg:hidden p-1 rounded-md transition-colors"
+            style={{ color: "#AEAEB2" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#1D1D1F")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#AEAEB2")}
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         )}
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
-        {NAV_ITEMS.map(({ icon: Icon, label, to, badge }) => {
-          const isActive = to === "/" ? location.pathname === "/" : location.pathname.startsWith(to)
-          const { className: badgeClass, ...badgeStyle } = badge ? BADGE[badge.variant] : { className: "" }
+      <nav className="flex-1 overflow-y-auto px-2 py-3">
+        {NAV_GROUPS.map((group, gi) => {
+          const visibleItems = group.items.filter(
+            (item) => !item.adminOnly || profile?.role === "administrador"
+          )
+          if (visibleItems.length === 0) return null
 
           return (
-            <NavLink
-              key={to}
-              to={to}
-              onClick={onClose}
-              className="group flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150"
-              style={({ isActive: navActive }) => ({
-                background: (navActive && to !== "/") || isActive ? "#7C3AED" : "transparent",
-                color: isActive ? "#FFFFFF" : "#9CA3AF",
-                borderLeft: isActive ? "3px solid #F97316" : "3px solid transparent",
-                paddingLeft: "calc(0.75rem - 3px)",
-              })}
-              onMouseEnter={(e) => {
-                if (!isActive) {
-                  e.currentTarget.style.background = "rgba(255,255,255,0.05)"
-                  e.currentTarget.style.color = "#FFFFFF"
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive) {
-                  e.currentTarget.style.background = "transparent"
-                  e.currentTarget.style.color = "#9CA3AF"
-                }
-              }}
-            >
-              <Icon
-                size={18}
-                style={{ color: isActive ? "#FFFFFF" : "#6B7280", flexShrink: 0 }}
-              />
-              <span className="flex-1 truncate">{label}</span>
-              {badge && (
-                <span className={badgeClass} style={badgeStyle}>
-                  {badge.text}
-                </span>
+            <div key={gi}>
+              {group.label && (
+                <div
+                  className="px-3 pb-1"
+                  style={{
+                    marginTop: gi === 0 ? 0 : "20px",
+                    borderTop: gi === 0 ? "none" : "1px solid #E8E8ED",
+                    paddingTop: gi === 0 ? 0 : "16px",
+                  }}
+                >
+                  <span
+                    className="text-[10px] font-semibold uppercase tracking-widest"
+                    style={{ color: "#AEAEB2" }}
+                  >
+                    {group.label}
+                  </span>
+                </div>
               )}
-            </NavLink>
+              <div className="space-y-0.5 mt-1">
+                {visibleItems.map(({ icon: Icon, label, to, badge }) => {
+                  const isActive = to === "/" ? location.pathname === "/" : location.pathname.startsWith(to)
+                  return (
+                    <NavLink
+                      key={to}
+                      to={to}
+                      onClick={onClose}
+                      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150"
+                      style={() => ({
+                        background: isActive ? "#F3EEFF" : "transparent",
+                        color: isActive ? "#6D28D9" : "#6E6E73",
+                      })}
+                      onMouseEnter={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.background = "#F5F5F7"
+                          e.currentTarget.style.color = "#1D1D1F"
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.background = "transparent"
+                          e.currentTarget.style.color = "#6E6E73"
+                        }
+                      }}
+                    >
+                      <Icon
+                        size={16}
+                        style={{
+                          color: isActive ? "#6D28D9" : "#AEAEB2",
+                          flexShrink: 0,
+                          transition: "color 0.15s",
+                        }}
+                      />
+                      <span className="flex-1 truncate">{label}</span>
+                      {badge && <NavBadge variant={badge.variant} text={badge.text} />}
+                    </NavLink>
+                  )
+                })}
+              </div>
+            </div>
           )
         })}
       </nav>
 
       {/* Footer */}
       <div
-        className="px-6 py-4 text-center"
-        style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+        className="px-5 py-4"
+        style={{ borderTop: "1px solid #E8E8ED" }}
       >
-        <p className="text-[11px]" style={{ color: "#4B5563" }}>
+        <p className="text-[11px]" style={{ color: "#AEAEB2" }}>
           IntegrIApp v1.0
         </p>
       </div>
@@ -222,45 +294,59 @@ function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
 
   return (
     <header
-      className="h-16 shrink-0 flex items-center justify-between px-6"
-      style={{ background: "#FFFFFF", borderBottom: "1px solid #E5E7EB" }}
+      className="h-14 shrink-0 flex items-center justify-between px-6"
+      style={{
+        background: "#FFFFFF",
+        borderBottom: "1px solid #E8E8ED",
+      }}
     >
       {/* Left */}
       <div className="flex items-center gap-3">
         <button
           onClick={onMenuClick}
           className="lg:hidden p-1.5 rounded-md transition-colors"
-          style={{ color: "#FFFFFF", background: "#7C3AED" }}
+          style={{ color: "#6E6E73" }}
+          onMouseEnter={(e) => (e.currentTarget.style.background = "#F5F5F7")}
+          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
         >
-          <Menu size={20} />
+          <Menu size={18} />
         </button>
 
-        <h1 className="text-base font-bold" style={{ color: "#1A1A2E" }}>
+        <h1
+          className="font-medium"
+          style={{ fontSize: "15px", color: "#1D1D1F" }}
+        >
           {pageTitle}
         </h1>
       </div>
 
       {/* Right */}
       <div className="flex items-center gap-3">
-        {/* Avatar dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button
-              className="flex items-center justify-center w-9 h-9 rounded-full text-sm font-bold text-white focus:outline-none transition-opacity hover:opacity-80"
-              style={{ background: "#7C3AED" }}
+              className="flex items-center justify-center rounded-full text-sm font-semibold text-white focus:outline-none transition-opacity hover:opacity-85"
+              style={{
+                width: "32px",
+                height: "32px",
+                background: "#6D28D9",
+              }}
             >
               {initials}
             </button>
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent align="end" className="w-56">
-            {/* User info */}
+          <DropdownMenuContent
+            align="end"
+            className="w-56"
+            style={{ border: "1px solid #E8E8ED", boxShadow: "0 4px 12px rgba(0,0,0,0.06)" }}
+          >
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col gap-1.5">
-                <p className="text-sm font-semibold leading-none text-gray-900">
+                <p className="text-sm font-semibold leading-none" style={{ color: "#1D1D1F" }}>
                   {profile?.full_name ?? "Usuario"}
                 </p>
-                <p className="text-xs leading-none text-gray-500">
+                <p className="text-xs leading-none" style={{ color: "#6E6E73" }}>
                   {profile?.email ?? ""}
                 </p>
                 {profile?.role && (
@@ -271,21 +357,21 @@ function Topbar({ onMenuClick }: { onMenuClick: () => void }) {
               </div>
             </DropdownMenuLabel>
 
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator style={{ background: "#E8E8ED" }} />
 
             <DropdownMenuItem onClick={() => navigate("/perfil")}>
-              <User className="mr-2 h-4 w-4 text-gray-500" />
+              <User className="mr-2 h-4 w-4" style={{ color: "#AEAEB2" }} />
               Mi perfil
             </DropdownMenuItem>
 
             {profile?.role === "administrador" && (
               <DropdownMenuItem onClick={() => navigate("/usuarios")}>
-                <Users2 className="mr-2 h-4 w-4 text-gray-500" />
+                <Users2 className="mr-2 h-4 w-4" style={{ color: "#AEAEB2" }} />
                 Gestión de usuarios
               </DropdownMenuItem>
             )}
 
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator style={{ background: "#E8E8ED" }} />
 
             <DropdownMenuItem
               onClick={handleSignOut}
@@ -306,7 +392,7 @@ export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden" style={{ background: "#FAFAFA" }}>
       {/* Desktop sidebar */}
       <div className="hidden lg:flex">
         <Sidebar />
@@ -316,7 +402,7 @@ export default function Layout() {
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-40 flex">
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/30"
             onClick={() => setMobileOpen(false)}
           />
           <div className="relative z-50">
@@ -330,7 +416,7 @@ export default function Layout() {
         <Topbar onMenuClick={() => setMobileOpen(true)} />
         <main
           className="flex-1 overflow-auto"
-          style={{ background: "#F8F7FF", padding: "32px" }}
+          style={{ background: "#FAFAFA", padding: "32px" }}
         >
           <Outlet />
         </main>

@@ -6,71 +6,77 @@
 
 @layer base {
   :root {
-    /* ── IntegrIA Solutions palette ── */
-    --integria-violet:        #7C3AED;
-    --integria-violet-mid:    #8B5CF6;
-    --integria-violet-light:  #A78BFA;
-    --integria-orange:        #F97316;
-    --integria-orange-light:  #FB923C;
-    --integria-bg:            #FFFFFF;
-    --integria-sidebar-bg:    #0F0F1A;
-    --integria-card-bg:       #F8F7FF;
-    --integria-text:          #1A1A2E;
-    --integria-text-muted:    #6B7280;
-    --integria-gradient:      linear-gradient(135deg, #7C3AED 0%, #F97316 100%);
-    --integria-shadow:        0 4px 24px 0 rgba(124, 58, 237, 0.15);
-    --integria-shadow-lg:     0 8px 40px 0 rgba(124, 58, 237, 0.22);
+    /* ── IntegrIA Solutions — sobrio palette ── */
+    --background:      #FAFAFA;
+    --surface:         #FFFFFF;
+    --surface-2:       #F5F5F7;
+    --border:          #E8E8ED;
+    --border-subtle:   #F0F0F5;
+    --text-primary:    #1D1D1F;
+    --text-secondary:  #6E6E73;
+    --text-tertiary:   #AEAEB2;
+    --accent:          #6D28D9;
+    --accent-hover:    #5B21B6;
+    --accent-light:    #F3EEFF;
+    --accent-subtle:   #EDE9FE;
+    --orange:          #EA580C;
+    --orange-light:    #FFF4EE;
+    --green:           #16A34A;
+    --green-light:     #F0FDF4;
+    --red:             #DC2626;
+    --red-light:       #FEF2F2;
+    --shadow-sm:       0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md:       0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
 
-    /* ── shadcn/ui tokens (mapped to IntegrIA palette) ── */
-    --background: 0 0% 100%;
-    --foreground: 240 40% 14%;
+    /* ── shadcn/ui tokens ── */
+    --foreground:             220 14% 12%;
 
-    --card: 252 100% 99%;
-    --card-foreground: 240 40% 14%;
+    --card:                   0 0% 100%;
+    --card-foreground:        220 14% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 40% 14%;
+    --popover:                0 0% 100%;
+    --popover-foreground:     220 14% 12%;
 
-    --primary: 263 76% 57%;
-    --primary-foreground: 0 0% 100%;
+    --primary:                263 69% 51%;
+    --primary-foreground:     0 0% 100%;
 
-    --secondary: 252 60% 96%;
-    --secondary-foreground: 240 40% 20%;
+    --secondary:              240 5% 96%;
+    --secondary-foreground:   220 14% 20%;
 
-    --muted: 252 40% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted:                  240 5% 96%;
+    --muted-foreground:       220 9% 44%;
 
-    --accent: 25 95% 53%;
-    --accent-foreground: 0 0% 100%;
+    --accent-shadcn:          240 5% 96%;
+    --accent-foreground:      220 14% 20%;
 
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive:            0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
 
-    --success: 152 60% 36%;
-    --success-foreground: 0 0% 100%;
+    --success:                142 72% 29%;
+    --success-foreground:     0 0% 100%;
 
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 10%;
+    --warning:                38 92% 50%;
+    --warning-foreground:     0 0% 10%;
 
-    --border: 252 30% 88%;
-    --input: 252 30% 88%;
-    --ring: 263 76% 57%;
+    --border:                 240 6% 91%;
+    --input:                  240 6% 91%;
+    --ring:                   263 69% 51%;
 
-    --radius: 0.5rem;
+    --radius:                 0.5rem;
 
-    --sidebar-background: 240 56% 8%;
-    --sidebar-foreground: 252 20% 82%;
-    --sidebar-primary: 263 76% 65%;
+    --sidebar-background:     0 0% 100%;
+    --sidebar-foreground:     220 9% 44%;
+    --sidebar-primary:        263 69% 51%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 40% 14%;
-    --sidebar-accent-foreground: 252 20% 92%;
-    --sidebar-border: 240 35% 16%;
-    --sidebar-ring: 263 76% 65%;
-    --sidebar-muted: 240 30% 20%;
+    --sidebar-accent:         240 5% 96%;
+    --sidebar-accent-foreground: 220 14% 12%;
+    --sidebar-border:         240 6% 91%;
+    --sidebar-ring:           263 69% 51%;
+    --sidebar-muted:          240 5% 96%;
 
-    --chart-1: 263 76% 57%;
-    --chart-2: 25 95% 53%;
-    --chart-3: 152 60% 36%;
+    --chart-1: 263 69% 51%;
+    --chart-2: 24 95% 46%;
+    --chart-3: 142 72% 29%;
     --chart-4: 38 92% 50%;
     --chart-5: 0 72% 51%;
   }
@@ -82,31 +88,31 @@
     --card-foreground: 210 20% 92%;
     --popover: 222 25% 12%;
     --popover-foreground: 210 20% 92%;
-    --primary: 210 60% 55%;
-    --primary-foreground: 220 25% 8%;
+    --primary: 263 69% 60%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 217 20% 18%;
     --secondary-foreground: 210 20% 90%;
     --muted: 217 20% 16%;
     --muted-foreground: 215 16% 58%;
-    --accent: 186 55% 45%;
-    --accent-foreground: 0 0% 100%;
+    --accent-shadcn: 217 20% 18%;
+    --accent-foreground: 210 20% 90%;
     --destructive: 0 62% 45%;
-    --destructive-foreground: 210 40% 98%;
-    --success: 152 55% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 55% 42%;
     --success-foreground: 0 0% 100%;
     --warning: 38 88% 55%;
     --warning-foreground: 0 0% 10%;
     --border: 217 20% 20%;
     --input: 217 20% 20%;
-    --ring: 210 60% 55%;
+    --ring: 263 69% 60%;
     --sidebar-background: 222 30% 6%;
     --sidebar-foreground: 210 20% 80%;
-    --sidebar-primary: 186 55% 50%;
+    --sidebar-primary: 263 69% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 222 25% 14%;
     --sidebar-accent-foreground: 210 20% 90%;
     --sidebar-border: 222 25% 14%;
-    --sidebar-ring: 186 55% 50%;
+    --sidebar-ring: 263 69% 60%;
     --sidebar-muted: 222 20% 18%;
   }
 }
@@ -117,13 +123,15 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply antialiased;
+    background-color: var(--background);
+    color: var(--text-primary);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: var(--integria-text);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-primary);
   }
 
   .font-mono {
@@ -133,11 +141,19 @@
 
 @layer components {
   .kpi-card {
-    @apply bg-card rounded-lg border p-5 shadow-sm transition-shadow hover:shadow-md;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
   }
 
   .table-container {
-    @apply bg-card rounded-lg border shadow-sm overflow-hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
   }
 
   .page-header {
@@ -145,11 +161,16 @@
   }
 
   .page-title {
-    @apply text-2xl font-semibold text-foreground tracking-tight;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
   }
 
   .page-subtitle {
-    @apply text-sm text-muted-foreground mt-1;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 2px;
   }
 
   .status-badge {
@@ -157,62 +178,78 @@
   }
 
   .status-borrador {
-    @apply status-badge bg-secondary text-secondary-foreground;
+    @apply status-badge;
+    background: var(--surface-2);
+    color: var(--text-secondary);
   }
 
   .status-contabilizado {
-    @apply status-badge bg-primary/10 text-primary;
+    @apply status-badge;
+    background: var(--accent-light);
+    color: var(--accent);
   }
 
   .status-conciliado {
-    @apply status-badge bg-success/10 text-success;
+    @apply status-badge;
+    background: var(--green-light);
+    color: var(--green);
   }
 
   .status-pendiente {
-    @apply status-badge bg-warning/10 text-warning;
+    @apply status-badge bg-amber-50 text-amber-700;
   }
 
   .status-rechazado {
-    @apply status-badge bg-destructive/10 text-destructive;
+    @apply status-badge;
+    background: var(--red-light);
+    color: var(--red);
   }
 
   .form-section {
-    @apply bg-card rounded-lg border p-6 space-y-4;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    @apply space-y-4;
   }
 
   .form-section-title {
-    @apply text-base font-semibold text-foreground border-b pb-3 mb-4;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
   }
 
   .sidebar-section-label {
-    @apply text-[10px] uppercase tracking-widest font-semibold text-sidebar-foreground/50 px-3 pt-4 pb-1;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    padding: 16px 12px 4px;
   }
 
-  /* ── IntegrIA utility classes ── */
-
+  /* kept for backward compat — no gradient */
   .gradient-text {
-    background: var(--integria-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    color: var(--text-primary);
     font-weight: 700;
   }
 
   .card-hover {
-    @apply transition-all duration-200;
-    box-shadow: var(--integria-shadow);
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
   .card-hover:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--integria-shadow-lg);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
   }
 
   .badge-flujo {
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold;
-    background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(249,115,22,0.12) 100%);
-    border: 1px solid rgba(124, 58, 237, 0.25);
-    color: var(--integria-violet);
+    background: var(--accent-light);
+    border: 1px solid var(--accent-subtle);
+    color: var(--accent);
   }
 }
 

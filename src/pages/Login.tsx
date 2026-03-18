@@ -30,114 +30,126 @@ export default function Login() {
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4"
-      style={{ background: "linear-gradient(135deg, #0F0F1A 0%, #1A0F2E 50%, #0F1A2E 100%)" }}
+      style={{ background: "#FAFAFA" }}
     >
-      {/* Decorative blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #7C3AED, transparent)" }} />
-        <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #F97316, transparent)" }} />
-      </div>
-
       <div
-        className="relative w-full max-w-md rounded-2xl p-8 space-y-7"
+        className="w-full max-w-sm"
         style={{
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(124,58,237,0.3)",
-          boxShadow: "0 0 60px rgba(124,58,237,0.15), 0 24px 48px rgba(0,0,0,0.5)",
-          backdropFilter: "blur(16px)",
+          background: "#FFFFFF",
+          border: "1px solid #E8E8ED",
+          borderRadius: "16px",
+          padding: "48px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04)",
         }}
       >
         {/* Logo */}
-        <div className="text-center space-y-1">
+        <div className="mb-8">
           <h1
-            className="text-5xl font-black tracking-tight"
-            style={{
-              background: "linear-gradient(135deg, #7C3AED 0%, #A855F7 40%, #F97316 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
+            className="font-bold"
+            style={{ fontSize: "24px", color: "#1D1D1F", lineHeight: 1.1 }}
           >
             IntegrIApp
           </h1>
-          <p className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <p className="mt-1.5" style={{ fontSize: "14px", color: "#6E6E73" }}>
             Plataforma de automatizaciones
           </p>
         </div>
 
-        {/* Divider */}
-        <div className="h-px" style={{ background: "linear-gradient(90deg, transparent, rgba(124,58,237,0.5), transparent)" }} />
-
         {/* Fields */}
         <div className="space-y-4">
+
+          {/* Email */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.6)" }}>
+            <label
+              className="text-[13px] font-medium"
+              style={{ color: "#1D1D1F" }}
+            >
               Correo electrónico
             </label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "rgba(124,58,237,0.8)" }} />
+              <Mail
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4"
+                style={{ color: "#AEAEB2" }}
+              />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleLogin()}
                 placeholder="correo@empresa.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm text-white placeholder:text-gray-600 outline-none transition-all"
+                className="w-full pl-9 pr-4 py-2.5 text-sm outline-none transition-all"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(124,58,237,0.25)",
+                  background: "#FAFAFA",
+                  border: "1px solid #E8E8ED",
+                  borderRadius: "8px",
+                  color: "#1D1D1F",
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "rgba(124,58,237,0.7)")}
-                onBlur={(e) => (e.target.style.borderColor = "rgba(124,58,237,0.25)")}
+                onFocus={(e) => (e.target.style.borderColor = "#6D28D9")}
+                onBlur={(e) => (e.target.style.borderColor = "#E8E8ED")}
               />
             </div>
           </div>
 
+          {/* Password */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.6)" }}>
+            <label
+              className="text-[13px] font-medium"
+              style={{ color: "#1D1D1F" }}
+            >
               Contraseña
             </label>
             <div className="relative">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: "rgba(124,58,237,0.8)" }} />
+              <Lock
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4"
+                style={{ color: "#AEAEB2" }}
+              />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleLogin()}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm text-white placeholder:text-gray-600 outline-none transition-all"
+                className="w-full pl-9 pr-4 py-2.5 text-sm outline-none transition-all"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(124,58,237,0.25)",
+                  background: "#FAFAFA",
+                  border: "1px solid #E8E8ED",
+                  borderRadius: "8px",
+                  color: "#1D1D1F",
                 }}
-                onFocus={(e) => (e.target.style.borderColor = "rgba(124,58,237,0.7)")}
-                onBlur={(e) => (e.target.style.borderColor = "rgba(124,58,237,0.25)")}
+                onFocus={(e) => (e.target.style.borderColor = "#6D28D9")}
+                onBlur={(e) => (e.target.style.borderColor = "#E8E8ED")}
               />
             </div>
           </div>
 
+          {/* Error */}
           {error && (
-            <p className="text-xs text-red-400 text-center bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+            <p
+              className="text-xs text-center px-3 py-2 rounded-lg"
+              style={{
+                color: "#DC2626",
+                background: "#FEF2F2",
+                border: "1px solid #FECACA",
+              }}
+            >
               {error}
             </p>
           )}
 
+          {/* Submit */}
           <button
             onClick={handleLogin}
             disabled={loading}
-            className="w-full py-2.5 rounded-lg text-sm font-semibold text-white flex items-center justify-center gap-2 transition-all disabled:opacity-60"
+            className="w-full py-2.5 text-sm font-semibold text-white flex items-center justify-center gap-2 transition-colors disabled:opacity-60"
             style={{
-              background: loading
-                ? "rgba(124,58,237,0.5)"
-                : "linear-gradient(135deg, #7C3AED, #9333EA)",
-              boxShadow: loading ? "none" : "0 4px 20px rgba(124,58,237,0.4)",
+              background: "#6D28D9",
+              borderRadius: "8px",
             }}
             onMouseEnter={(e) => {
-              if (!loading) (e.currentTarget.style.boxShadow = "0 4px 28px rgba(124,58,237,0.6)")
+              if (!loading) e.currentTarget.style.background = "#5B21B6"
             }}
             onMouseLeave={(e) => {
-              if (!loading) (e.currentTarget.style.boxShadow = "0 4px 20px rgba(124,58,237,0.4)")
+              if (!loading) e.currentTarget.style.background = "#6D28D9"
             }}
           >
             {loading ? (
@@ -151,8 +163,12 @@ export default function Login() {
           </button>
         </div>
 
-        <p className="text-center text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
-          IntegrIA Solutions © 2025
+        {/* Footer */}
+        <p
+          className="text-center text-[12px] mt-8"
+          style={{ color: "#AEAEB2" }}
+        >
+          IntegrIA Solutions © 2026
         </p>
       </div>
     </div>
